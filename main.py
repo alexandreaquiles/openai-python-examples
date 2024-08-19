@@ -4,20 +4,35 @@ import os
 
 load_dotenv()
 cliente = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-modelo='gpt-3.5-turbo'
+modelo='gpt-4'
 prompt_sistema = """
-Classifique o produto abaixo em uma das categorias: Higiene Pessoal, Moda ou Casa e dê uma descrição da categoria.
+Você é um categorizador de produtos.
+Você deve assumir as categorias presentes na lista abaixo.
+
+# Lista de Categorias Válidas
+
+  - Moda Sustentável
+  - Produtos para o Lar
+  - Beleza Natural
+  - Eletrônicos Verdes
+  - Higiene Pessoal
+
+# Formato da Saída
+  Produto: Nome do Produto
+  Categoria: apresente a categoria do produto
+
+# Exemplo de Saída
+  Produto: Escova elétrica com recarga solar
+  Categoria: Eletrônicos Verdes
 """
 
-prompt_usuario = """
-Escova de bambu
-"""
+prompt_usuario = input('Digite o nome de um produto sustentável: ')
 
 resposta = cliente.chat.completions.create(
   messages=[
   {
     "role": "system",
-    "content":prompt_sistema
+    "content": prompt_sistema
   },
   {
     "role": "user",

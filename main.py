@@ -10,11 +10,15 @@ resposta = cliente.chat.completions.create(
   messages=[
   {
     "role": "system",
-    "content": "Listar apenas os nomes dos produtos, sem considerar descrição."
+    "content": """
+    Classifique o produto abaixo em uma das categorias: Higiene Pessoal, Moda ou Casa e dê uma descrição da categoria.
+    """
   },
   {
     "role": "user",
-    "content": "Liste 3 produtos sustentáveis"
+    "content": """
+    Escova de bambu
+    """
   }
   ],
   model='gpt-3.5-turbo'

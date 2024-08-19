@@ -21,6 +21,11 @@ resposta = cliente.chat.completions.create(
     """
   }
   ],
-  model='gpt-3.5-turbo'
+  model='gpt-3.5-turbo',
+  temperature=0,
+  max_tokens=200,
+  n=3
 )
-print(resposta.choices[0].message.content)
+
+for i in range(0,3):
+  print(f"\n{resposta.choices[i].message.content}")

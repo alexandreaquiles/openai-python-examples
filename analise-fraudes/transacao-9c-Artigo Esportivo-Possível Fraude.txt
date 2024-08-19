@@ -1,0 +1,3 @@
+Recomendação: **Acionar setor Anti-Fraude**
+
+Classificação do tipo de fraude: **Transação Suspeita de Alto Valor**

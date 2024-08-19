@@ -3,29 +3,30 @@ from dotenv import load_dotenv
 import os
 
 load_dotenv()
-print(os.getenv('OPENAI_API_KEY'))
 cliente = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+modelo='gpt-3.5-turbo'
+prompt_sistema = """
+Classifique o produto abaixo em uma das categorias: Higiene Pessoal, Moda ou Casa e dê uma descrição da categoria.
+"""
+
+prompt_usuario = """
+Escova de bambu
+"""
 
 resposta = cliente.chat.completions.create(
   messages=[
   {
     "role": "system",
-    "content": """
-    Classifique o produto abaixo em uma das categorias: Higiene Pessoal, Moda ou Casa e dê uma descrição da categoria.
-    """
+    "content":prompt_sistema
   },
   {
     "role": "user",
-    "content": """
-    Escova de bambu
-    """
+    "content": prompt_usuario
   }
   ],
-  model='gpt-3.5-turbo',
+  model=modelo,
   temperature=0,
-  max_tokens=200,
-  n=3
+  max_tokens=200
 )
 
-for i in range(0,3):
-  print(f"\n{resposta.choices[i].message.content}")
+print(f"\n{resposta.choices[0].message.content}")
